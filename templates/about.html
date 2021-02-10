@@ -1,0 +1,42 @@
+﻿{% extends "base.html" %}
+{% block content %}
+ <div id="main-container" class="container clearfix">
+	<section class="post-left">
+		<div class="breadcrumb">您的位置： <a itemprop="breadcrumb" href="/">首页</a> » <span class="current">关于我们</span></div>				<div class="post-main clearfix">
+			<h1 class="post-title">关于博主</h1>
+			<div class="post-con clearfix">
+				<div class="article-meta"> <span class="item">上次更新日期：{{ about_list.last_update_time }}</span></div>
+				<article class="article-content">
+                    {{ about_list.about_content|safe }}
+				</article>
+
+			</div>
+
+		</div>
+				<!-- /文章 -->
+	</section>
+	<!-- /post-left -->
+	<!-- /post-right -->
+<aside class="post-right hidden-xs">
+<!-- /关注我们 -->
+            <div class="post-right-item">
+                <h4 class="post-right-title">关注博主</h4>
+                <div class="wid-about">
+                    <p>博主很闲，欢迎联系！</p>
+                    <img src="/media/{{ about_list.weixin }}" srcset="/media/{{ about_list.weixin }}" width="160" height="160"/>
+                </div>
+                <div class="wid-about">
+                    <p><strong>联系方式:</strong></p>
+                    <p>QQ:{{about_list.QQ}}</p>
+                    <p>Email：{{ about_list.email}}</p>
+                </div>
+            </div>
+
+</aside>
+</div>
+<!-- /主体 -->
+<!-- 底部 -->
+
+
+<!-- 底部 -->
+{% endblock content %}
