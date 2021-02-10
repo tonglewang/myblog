@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 import django_heroku
-django_heroku.settings(locals())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -130,9 +129,14 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 if os.getcwd() == '/app':
     import dj_database_url
+
+    django_heroku.settings(locals())
 
     DATABASES = {
         'default': dj_database_url.config(default='postgres://localhost')
@@ -144,9 +148,6 @@ if os.getcwd() == '/app':
     # 只允许Heroku托管这个项目
     ALLOWED_HOSTS = ["https://tongleblog.herokuapp.com"]
     DEBUG = False
-    STATIC_ROOT = 'staticfiles'
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
+    STATIC_ROOT = 'static'
 
 
