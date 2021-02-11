@@ -14,6 +14,7 @@ import os
 
 import django_heroku
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -135,9 +136,6 @@ STATICFILES_DIRS = (
 
 if os.getcwd() == '/app':
     import dj_database_url
-
-    django_heroku.settings(locals())
-
     DATABASES = {
         'default': dj_database_url.config(default='postgres://localhost')
     }
@@ -149,5 +147,4 @@ if os.getcwd() == '/app':
     ALLOWED_HOSTS = ["https://tongleblog.herokuapp.com"]
     DEBUG = False
     STATIC_ROOT = 'static'
-
-
+django_heroku.settings(locals())
