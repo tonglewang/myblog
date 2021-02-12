@@ -1,2 +1,2 @@
 web: gunicorn myblog.wsgi --log-file -
-web: python manage.py runserver 0.0.0.0:5050
+web: python manage.py runserver 0.0.0.0:$port
