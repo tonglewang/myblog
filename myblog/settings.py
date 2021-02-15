@@ -26,7 +26,7 @@ SECRET_KEY = 'v!!pwv2nac3m#a=#n%hv&3bvl@l(4iu$ce+h%5vj0&j%m_891-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://tongleblog.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['https://tongleblog.herokuapp.com','127.0.0.1','tongleblog.herokuapp.com']
 
 # Application definition
 
