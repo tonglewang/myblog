@@ -24,13 +24,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'v!!pwv2nac3m#a=#n%hv&3bvl@l(4iu$ce+h%5vj0&j%m_891-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://tongleblog.herokuapp.com','127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'myblog.urls'
@@ -115,28 +117,19 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 STATIC_URL = '/static/'
-# STATIC_ROOT = 'static'
-
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-if os.getcwd() == '/app':
-    import dj_database_url
-    DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
-    }
-    # 让request.is_secure()承认X-Forwarded-Proto头
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    # 只允许Heroku托管这个项目
-    ALLOWED_HOSTS = ["https://tongleblog.herokuapp.com"]
-    DEBUG = False
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+if os.getenv('DATABASE_URL') is not None:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(default='postgres://postgresql-concave-26819')
+# 让request.is_secure()承认X-Forwarded-Proto头
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 django_heroku.settings(locals())
