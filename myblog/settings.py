@@ -131,7 +131,7 @@ if os.getenv('DATABASE_URL') is not None:
     DATABASES['default'] = dj_database_url.config(default='postgres://postgresql-concave-26819')
 # 让request.is_secure()承认X-Forwarded-Proto头
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 django_heroku.settings(locals())
 
 LOGGING = {
